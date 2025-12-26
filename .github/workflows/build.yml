@@ -17,17 +17,12 @@ jobs:
         uses: actions/setup-java@v4
         with:
           distribution: 'temurin'
-          java-version: '21'  # Java 21 para Paper 1.21[web:152]
+          java-version: '21'
 
-      - name: Dar permissão ao Gradle wrapper (se existir)
-        run: |
-          if [ -f ./gradlew ]; then
-            chmod +x ./gradlew
-          fi
-
-      - name: Build com Gradle
-        run: |
-          ./gradlew build || ./gradlew.bat build
+      - name: Build com Gradle (sem wrapper)
+        uses: gradle/gradle-build-action@v3
+        with:
+          arguments: build
 
       - name: Salvar artefatos (.jar dos plugins)
         uses: actions/upload-artifact@v4
@@ -37,4 +32,4 @@ jobs:
             plugin-core/build/libs/*.jar
             plugin-teams/build/libs/*.jar
             plugin-base/build/libs/*.jar
-            plugin-combat/build/libs/*.jar[web:146][web:151]
+            plugin-combat/build/libs/*.jar
