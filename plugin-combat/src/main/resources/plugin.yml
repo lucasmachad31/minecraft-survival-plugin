@@ -1,0 +1,7 @@
+name: SurvivalCombat
+version: 1.0.0
+main: com.survival.combat.CombatPlugin
+api-version: "1.21"
+description: Combat tag, portal, and RTP system
+depends:
+  - SurvivalCore
