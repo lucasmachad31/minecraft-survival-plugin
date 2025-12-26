@@ -1,0 +1,7 @@
+name: SurvivalTeams
+version: 1.0.0
+main: com.survival.teams.TeamPlugin
+api-version: "1.21"
+description: Team management and powers
+depends:
+  - SurvivalCore
