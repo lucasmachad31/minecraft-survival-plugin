@@ -17,12 +17,16 @@ jobs:
         uses: actions/setup-java@v4
         with:
           distribution: 'temurin'
-          java-version: '21'
+          java-version: '21' # Java 21 para Paper 1.21[web:152]
 
-      - name: Build com Gradle (sem wrapper)
-        uses: gradle/gradle-build-action@v3
-        with:
-          arguments: build
+      - name: Instalar Gradle CLI
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y gradle
+
+      - name: Build com Gradle (root build.gradle)
+        run: |
+          gradle build --no-daemon
 
       - name: Salvar artefatos (.jar dos plugins)
         uses: actions/upload-artifact@v4
@@ -32,4 +36,4 @@ jobs:
             plugin-core/build/libs/*.jar
             plugin-teams/build/libs/*.jar
             plugin-base/build/libs/*.jar
-            plugin-combat/build/libs/*.jar
+            plugin-combat/build/libs/*.jar[web:154][web:158]
