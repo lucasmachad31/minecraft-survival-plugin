@@ -1,0 +1,7 @@
+name: SurvivalBase
+version: 1.0.0
+main: com.survival.base.BasePlugin
+api-version: "1.21"
+description: Base protection and core system
+depends:
+  - SurvivalCore
