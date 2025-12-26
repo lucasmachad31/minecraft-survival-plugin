@@ -1,0 +1,40 @@
+name: Build plugins
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout código
+        uses: actions/checkout@v4
+
+      - name: Configurar Java 21
+        uses: actions/setup-java@v4
+        with:
+          distribution: 'temurin'
+          java-version: '21'  # Java 21 para Paper 1.21[web:152]
+
+      - name: Dar permissão ao Gradle wrapper (se existir)
+        run: |
+          if [ -f ./gradlew ]; then
+            chmod +x ./gradlew
+          fi
+
+      - name: Build com Gradle
+        run: |
+          ./gradlew build || ./gradlew.bat build
+
+      - name: Salvar artefatos (.jar dos plugins)
+        uses: actions/upload-artifact@v4
+        with:
+          name: plugins
+          path: |
+            plugin-core/build/libs/*.jar
+            plugin-teams/build/libs/*.jar
+            plugin-base/build/libs/*.jar
+            plugin-combat/build/libs/*.jar[web:146][web:151]
